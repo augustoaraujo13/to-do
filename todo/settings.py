@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     # Meus apps
     'about.apps.AboutConfig',
     'tasks.apps.TasksConfig',
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
