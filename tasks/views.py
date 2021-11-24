@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse
 from .models import task
 from .forms import TaskForm
+from django.contrib import messages
 
 
 def taskList(request):
@@ -45,6 +46,12 @@ def editTask(request, id):
     else:
          return render(request, 'tasks/edittask.html', {'form': form, 'task': task1})
 
+
+def deleteTask(request, id):
+     task1 = get_object_or_404(task, pk=id)
+     task1.delete()
+     messages.info(request, 'Tarefa deletada com sucesso.')
+     return redirect('/')
 
 def helloWorld(request):
     return HttpResponse('Hello World!')
