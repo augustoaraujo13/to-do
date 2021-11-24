@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'about.apps.AboutConfig',
     'tasks.apps.TasksConfig',
     'users.apps.UsersConfig',
+    #apps de terceiros.
+    'crispy_forms',
 ]
 
 #teste
@@ -125,3 +127,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

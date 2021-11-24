@@ -8,10 +8,17 @@ from django.core.paginator import Paginator
 
 def taskList(request):
     # faz um select na tabela tasks.
-    tasks_list = task.objects.all().order_by('-created')
-    paginator1 = Paginator(tasks_list, 5)
-    page = request.GET.get('page')
-    task1 = paginator1.get_page(page)
+
+    search = request.GET.get('search')
+
+    if search:
+        task1 = task.objects.filter(title__icontains=search)
+    else:
+        tasks_list = task.objects.all().order_by('-created')
+        paginator1 = Paginator(tasks_list, 5)
+        page = request.GET.get('page')
+        task1 = paginator1.get_page(page)
+        
     return render(request, 'tasks/list.html', {'tasks': task1})
 
 
