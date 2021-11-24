@@ -3,12 +3,16 @@ from django.http import HttpResponse
 from .models import task
 from .forms import TaskForm
 from django.contrib import messages
+from django.core.paginator import Paginator
 
 
 def taskList(request):
     # faz um select na tabela tasks.
-    tasks = task.objects.all().order_by('-created')
-    return render(request, 'tasks/list.html', {'tasks': tasks})
+    tasks_list = task.objects.all().order_by('-created')
+    paginator1 = Paginator(tasks_list, 5)
+    page = request.GET.get('page')
+    task1 = paginator1.get_page(page)
+    return render(request, 'tasks/list.html', {'tasks': task1})
 
 
 def taskView(request, id):
@@ -30,7 +34,6 @@ def newTask(request):
         return render(request, 'tasks/addtask.html', {'form': form})
 
 
-
 def editTask(request, id):
     task1 = get_object_or_404(task, pk=id)
     form = TaskForm(instance=task1)
@@ -39,19 +42,20 @@ def editTask(request, id):
         form = TaskForm(request.POST, instance=task1)
 
         if (form.is_valid()):
-             task1.save()
-             return redirect('/')
+            task1.save()
+            return redirect('/')
         else:
             return render(request, 'task/edittask.html', {'form': form, 'task': task1})
     else:
-         return render(request, 'tasks/edittask.html', {'form': form, 'task': task1})
+        return render(request, 'tasks/edittask.html', {'form': form, 'task': task1})
 
 
 def deleteTask(request, id):
-     task1 = get_object_or_404(task, pk=id)
-     task1.delete()
-     messages.info(request, 'Tarefa deletada com sucesso.')
-     return redirect('/')
+    task1 = get_object_or_404(task, pk=id)
+    task1.delete()
+    messages.info(request, 'Tarefa deletada com sucesso.')
+    return redirect('/')
+
 
 def helloWorld(request):
     return HttpResponse('Hello World!')
