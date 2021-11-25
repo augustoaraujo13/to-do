@@ -11,9 +11,14 @@ def taskList(request):
     # faz um select na tabela tasks.
 
     search = request.GET.get('search')
+    filter = request.GET.get('filter')
 
     if search:
         task1 = task.objects.filter(title__icontains=search, user=request.user)
+    
+    elif filter:
+        task1 = task.objects.filter(done=filter, user=request.user)
+    
     else:
         tasks_list = task.objects.all().order_by('-created').filter(user=request.user)
         paginator1 = Paginator(tasks_list, 5)
