@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'about.apps.AboutConfig',
     'tasks.apps.TasksConfig',
     'users.apps.UsersConfig',
+    'accounts.apps.AccountsConfig',
     #apps de terceiros.
     'crispy_forms',
 ]
