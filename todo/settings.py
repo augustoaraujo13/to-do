@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '_#+#ru_-sw@tohkdh1@_mod7!_a5)ej28pg&t9h(frqh4zk)ja'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['https://meu-to-do-django.herokuapp.com/']
 
@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     # Meus apps
     'about.apps.AboutConfig',
     'tasks.apps.TasksConfig',
-    'users.apps.UsersConfig',
     'accounts.apps.AccountsConfig',
     #apps de terceiros.
     'crispy_forms',
